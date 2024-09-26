@@ -38,6 +38,7 @@
 								   th:href="@{|/books/edit/${libro.id}|}"> <i class="bi bi-pencil-square"></i></a>
 								<form th:action="@{'/books/delete/{id}'(id=${libro.id})}"
 									  method="post">
+<!--									  thymeleaf confirm dialog per il popup di conferma della cancellazione-->
 									<button class="btn btn-danger" type="submit" id="sumitButton"
 											th:data-confirm-delete="|Sei sicuro di voler cancellare il libro?|"
 											onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false">

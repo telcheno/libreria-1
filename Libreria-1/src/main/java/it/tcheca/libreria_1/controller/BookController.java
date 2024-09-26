@@ -102,7 +102,7 @@ public class BookController {
 		
 		repositoryBook.save(book);
 		
-		return"redirect:/books";
+		return "redirect:/books";
 	}
 
 	//metodo di cancelazione
@@ -111,6 +111,6 @@ public class BookController {
 		
 		repositoryBook.deleteById(idDelete);
 		
-		return "/redirect:/books";
+		return "redirect:/books";
 	}
 }
