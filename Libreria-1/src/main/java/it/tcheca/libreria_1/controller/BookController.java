@@ -47,7 +47,7 @@ public class BookController {
 	return "/books/index";
 	}
 	
-	//
+	//metodo di visualisazione
 	@GetMapping("/show/{id}")
 	public String show(@PathVariable("id") Integer idBook, Model model) {
 		
@@ -56,6 +56,7 @@ public class BookController {
 		return "/books/show";
 	}
 	
+	//metodo di crezione
 	@GetMapping("/create")
 	public String create(Model model) {
 		
@@ -80,5 +81,36 @@ public class BookController {
 	   return "redirect:/books";
 	}
 	
+	//metodo di aggiornamento
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer idEdit, Model model) {
+		
+		model.addAttribute("book", repositoryBook.findById(idEdit).get());
+		return "/books/edit";
+	}
+	
+	
+	@PostMapping("/edit/{id}")
+	public String update(
+			@Valid @ModelAttribute("book") Book book,
+			BindingResult bindingResult,
+			Model model){
+		
+		if(bindingResult.hasErrors()) {
+			return "/books/edit";
+		}
+		
+		repositoryBook.save(book);
+		
+		return"redirect:/books";
+	}
 
+	//metodo di cancelazione
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer idDelete) {
+		
+		repositoryBook.deleteById(idDelete);
+		
+		return "/redirect:/books";
+	}
 }
